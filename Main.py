@@ -50,6 +50,7 @@ def create_button():
     b = tk.Button(master, text="OK")
     b.grid()
 
+
 def matrix_to_subgrids(matrix):
     subgrids = [[],
                 [],
