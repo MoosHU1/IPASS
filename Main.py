@@ -8,7 +8,6 @@ import numpy
 master = tk.Tk()
 master.geometry("600x400")
 
-
 # def create_grid():
 #         master.title('Grid')
 #         entries = []
