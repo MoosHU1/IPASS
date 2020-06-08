@@ -52,7 +52,6 @@ def create_button():
 
 
 
-
 def matrix_to_subgrids(matrix):
     subgrids = [[],
                 [],
