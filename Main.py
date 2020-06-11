@@ -1,9 +1,12 @@
-'''Bron 1 create_grid: https://www.daniweb.com/programming/software-development/threads/446765/making-multiple-entry-boxes-in-a-for-loop'''
+'''Bron 1 create_grid: https://www.daniweb.com/programming/software-development/threads/446765/making-multiple-entry-matrixxes-in-a-for-loop'''
 
 
 import tkinter as tk
 import random as random
 import numpy
+from solver import *
+from dig_holes import *
+import tools
 
 master = tk.Tk()
 master.geometry("600x400")
@@ -46,6 +49,8 @@ master.geometry("600x400")
 
 
 
+
+
 def create_button():
     b = tk.Button(master, text="OK")
     b.grid()
@@ -77,7 +82,11 @@ def matrix_to_subgrids(matrix):
     return subgrids
 
 
-def backtracking():
+
+
+
+
+def generate_solved():
     # matrix1 = [
     #     [0, 0, 0, 0, 0, 0, 0, 0, 0]
     #     [0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -150,32 +159,7 @@ def backtracking():
     while row<9:
         column = 0
         while column < 9:
-
-            #In welke subgrid zit de huidige plek
-            if row == 0 or row == 1 or row == 2:
-                if column == 0 or column == 1 or column == 2:
-                    subgrid = 0
-                if column == 3 or column == 4 or column == 5:
-                    subgrid = 1
-                if column == 6 or column == 7 or column == 8:
-                    subgrid = 2
-
-            if row == 3 or row == 4 or row == 5:
-                if column == 0 or column == 1 or column == 2:
-                    subgrid = 3
-                if column == 3 or column == 4 or column == 5:
-                    subgrid = 4
-                if column == 6 or column == 7 or column == 8:
-                    subgrid = 5
-
-            if row == 6 or row == 7 or row == 8:
-                if column == 0 or column == 1 or column == 2:
-                    subgrid = 6
-                if column == 3 or column == 4 or column == 5:
-                    subgrid = 7
-                if column == 6 or column == 7 or column == 8:
-                    subgrid = 8
-
+            subgrid = tools.get_subgrid(row,column)
 
             correct = False
             nums= [1,2,3,4,5,6,7,8,9]
@@ -240,7 +224,9 @@ def backtracking():
         row+=1
     return matrix
 
-def draw_grid():
+
+
+def draw_grid(matrix_get):
     master.title('Grid')
     entries = []
 
@@ -265,7 +251,6 @@ def draw_grid():
             b += 1
 
 
-    matrix_get = backtracking()
     matrix = []
     for column in range(9):
         for row in range(9):
@@ -278,7 +263,32 @@ def draw_grid():
 
 
 
-create_button()
-draw_grid()
-master.mainloop()
+#
+# create_button()
+# draw_grid(generate_solved())
+# master.mainloop()
+matrix = [
+    [7, 8, 0, 4, 0, 0, 1, 2, 0],
+    [6, 0, 0, 0, 7, 5, 0, 0, 9],
+    [0, 0, 0, 6, 0, 1, 0, 7, 8],
+    [0, 0, 7, 0, 4, 0, 2, 6, 0],
+    [0, 0, 1, 0, 5, 0, 9, 3, 0],
+    [9, 0, 4, 0, 6, 0, 0, 0, 5],
+    [0, 7, 0, 3, 0, 0, 0, 1, 2],
+    [1, 2, 0, 0, 0, 7, 4, 0, 0],
+    [0, 4, 9, 2, 0, 6, 0, 0, 7]
+]
+# matrix = [
+#     [1, 2, 3, 4, 5, 6, 7, 8, 9],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 2, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 1, 3, 4],
+#     [2, 0, 0, 0, 0, 0, 5, 6, 0],
+#     [0, 0, 0, 0, 0, 0, 7, 8, 9]
+# ]
 
+draw_grid(easy(generate_solved()))
+master.mainloop()
