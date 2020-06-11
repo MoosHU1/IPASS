@@ -1,5 +1,6 @@
 from solver import *
 import random
+from tools import *
 
 def find_next(dict):
     #Lijst met keys die kunnen worden gedugt
@@ -17,9 +18,12 @@ def find_next(dict):
 def check_valid(matrix, row, column):
     correct_num = matrix[row,column]
 
-
+    print(correct_num)
     nums = [1,2,3,4,5,6,7,8,9]
     nums.remove(correct_num)
+
+    subgrid = get_subgrid(row,column)
+    subgrids = matrix_to_subgrids(matrix)
 
     for num in nums:
         #TODO Het getal wat je invuldt in temp matrix moet wel aan de regels voldoen
@@ -29,12 +33,11 @@ def check_valid(matrix, row, column):
             temp_matrix = matrix
             temp_matrix[row,column] = num
 
-        #Als er geen oplossing is ga dan verder
-        if solve(temp_matrix) == 0:
-            continue
-        else:
-            print(solve(temp_matrix))
-            return False
+            #Als er geen oplossing is ga dan verder
+            if solve(temp_matrix) == 0:
+                continue
+            else:
+                return False
 
 
     return True
@@ -58,6 +61,7 @@ def easy(matrix):
                 # Is er voor alle getallen geen oplossing dan kan de cel worden gedugt
                 if check_valid(matrix, next[0], next[1]) == True:
                     matrix[next[0], next[1]] = 0
+                    dict[next[0],next[1]] = 0
                 else:
                     dict[next] = 0
 

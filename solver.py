@@ -23,7 +23,6 @@ def solve(matrix):
             matrix[row][col] = 0
 
     loop += 1
-    print(loop)
     return False
 
 
