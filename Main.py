@@ -178,7 +178,7 @@ def draw_grid(matrix_get):
             # grid layout the entries
             entries[b].grid(row=nrow, column=ncolumn)
             # bind the entries return key pressed to an action
-            # master.entries[n].bind('<Return>', partial(master.action, n))
+            #tkinter.master.entries[n].bind('<Return>', partial(master.action, n))
             b += 1
 
 
@@ -189,7 +189,8 @@ def draw_grid(matrix_get):
 
 
     for i in range (0,81):
-        entries[i].insert('end', matrix[i] )
+        if matrix[i] != 0:
+            entries[i].insert('end', int(matrix[i]) )
 
 
 
@@ -221,5 +222,5 @@ matrix = [
 #     [0, 0, 0, 0, 0, 0, 7, 8, 9]
 # ]
 
-draw_grid(dig(generate_solved(), "medium"))
+draw_grid(dig(generate_solved(), "easy"))
 master.mainloop()
