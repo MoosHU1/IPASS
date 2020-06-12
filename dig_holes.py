@@ -1,8 +1,9 @@
 from solver import *
 import random
 from tools import *
+import numpy
 
-def find_next(dict):
+def find_next(dict, dif):
     #Lijst met keys die kunnen worden gedugt
     dugable = []
     for key, value in dict.items():
@@ -11,22 +12,38 @@ def find_next(dict):
 
     if len(dugable) == 0:
         return None
+
     else:
-        return random.choice(dugable)
+        #Voor elke moeilijkheidsgraad is er een verschillend dug patroon
+        if dif == "easy":
+            return random.choice(dugable)
+        elif dif == "medium":
+            return dugable[0]
 
 
-def check_valid(matrix, row, column):
+
+
+
+def check_valid(matrix, row, column, dif):
     correct_num = matrix[row,column]
 
-    print(correct_num)
     nums = [1,2,3,4,5,6,7,8,9]
     nums.remove(correct_num)
 
     subgrid = get_subgrid(row,column)
     subgrids = matrix_to_subgrids(matrix)
 
+    #Eerst moet er gekeken worden of als je deze cel dugt je een restrictie verbreekt (operation 2)
+
+    if dif == "easy":
+        randomized_bound = random.randrange(36,50)
+        if numpy.count_nonzero(matrix==0) > randomized_bound:
+            return False
+        elif numpy.count_nonzero(matrix[row]==0) >=4  or numpy.count_nonzero(matrix[:,column]==0) >=4:
+            return False
+
     for num in nums:
-        #TODO Het getal wat je invuldt in temp matrix moet wel aan de regels voldoen
+        #Het getal wat je gaat testen moet natuurlijk wel aan de regels voldoen
         if num not in matrix[row] and num not in matrix[:, column] and num not in subgrids[subgrid][0] \
                 and num not in subgrids[subgrid][1] and num not in subgrids[subgrid][2]:
 
@@ -42,7 +59,7 @@ def check_valid(matrix, row, column):
 
     return True
 
-def easy(matrix):
+def dig(matrix, dif):
     dict = {}
     print("AAAAAAAAAAAAAAA")
     # 1 betekent "can be dug", 0 betekent "can't be dug"
@@ -52,19 +69,20 @@ def easy(matrix):
 
     while 1==1:
         print(matrix)
-        next = find_next(dict)
+        next = find_next(dict, dif)
+
 
         if next != None:
-            if find_next(dict) == None:
+            if find_next(dict, dif) == None:
                 return matrix
             else:
                 # Is er voor alle getallen geen oplossing dan kan de cel worden gedugt
-                if check_valid(matrix, next[0], next[1]) == True:
+                if check_valid(matrix, next[0], next[1], dif) == True:
                     matrix[next[0], next[1]] = 0
                     dict[next[0],next[1]] = 0
                 else:
                     dict[next] = 0
-
+        #Als er geen cellen meer gedugt kunnen worden is de sudoku klaar
         else:
             return matrix
 
