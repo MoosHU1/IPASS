@@ -15,12 +15,16 @@ def find_next(dict, dif):
 
     else:
         #Voor elke moeilijkheidsgraad is er een verschillend dug patroon
+
         if dif == "easy":
+            #Kies een random cel
             return random.choice(dugable)
         elif dif == "medium":
-            return dugable[0]
-
-
+            #Sla steeds 1 cel over
+            try:
+                return dugable[1]
+            except:
+                return None
 
 
 
@@ -36,11 +40,28 @@ def check_valid(matrix, row, column, dif):
     #Eerst moet er gekeken worden of als je deze cel dugt je een restrictie verbreekt (operation 2)
 
     if dif == "easy":
-        randomized_bound = random.randrange(36,50)
-        if numpy.count_nonzero(matrix==0) > randomized_bound:
-            return False
-        elif numpy.count_nonzero(matrix[row]==0) >=4  or numpy.count_nonzero(matrix[:,column]==0) >=4:
-            return False
+        min_range = 36
+        max_range = 50
+        min_givens_rowcol = 4
+
+    if dif == "medium":
+        min_range = 32
+        max_range = 36
+        min_givens_rowcol = 3
+
+    if dif == "difficult":
+        min_range = 28
+        max_range = 32
+        min_givens_rowcol = 2
+
+
+    randomized_bound = random.randrange(min_range, max_range)
+    if numpy.count_nonzero(matrix==0) > randomized_bound:
+        return False
+    elif numpy.count_nonzero(matrix[row]==0)>=min_givens_rowcol  or numpy.count_nonzero(matrix[:,column]==0)>=min_givens_rowcol:
+        return False
+
+
 
     for num in nums:
         #Het getal wat je gaat testen moet natuurlijk wel aan de regels voldoen

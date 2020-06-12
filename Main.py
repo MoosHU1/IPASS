@@ -221,5 +221,5 @@ matrix = [
 #     [0, 0, 0, 0, 0, 0, 7, 8, 9]
 # ]
 
-draw_grid(dig(generate_solved(), "easy"))
+draw_grid(dig(generate_solved(), "medium"))
 master.mainloop()
