@@ -1,4 +1,5 @@
 # In welke subgrid zit de huidige plek
+import numpy
 
 def get_subgrid(row,column):
     if row == 0 or row == 1 or row == 2:
@@ -49,3 +50,17 @@ def matrix_to_subgrids(matrix):
     subgrids[8] = [list(matrix[6][6:9]), list(matrix[7][6:9]), list(matrix[8][6:9])]
 
     return subgrids
+
+def entries_to_matrix(entries):
+    matrix = numpy.zeros(shape=(9, 9))
+    matrix[:, 0] = entries[0:9]
+    matrix[:, 1] = entries[9:18]
+    matrix[:, 2] = entries[18:27]
+    matrix[:, 3] = entries[27:36]
+    matrix[:, 4] = entries[36:45]
+    matrix[:, 5] = entries[45:54]
+    matrix[:, 6] = entries[54:63]
+    matrix[:, 7] = entries[63:72]
+    matrix[:, 8] = entries[72:81]
+    return matrix
+

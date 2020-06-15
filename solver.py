@@ -1,3 +1,4 @@
+from tools import *
 
 loop = 0
 def solve(matrix):
@@ -38,16 +39,14 @@ def valid(matrix, num, pos):
         if matrix[i][pos[1]] == num and pos[0] != i:
             return False
 
-    # Check matrixx
-    matrixx_x = pos[1] // 3
-    matrixx_y = pos[0] // 3
+    # Check submatrixx
+    subgrids = matrix_to_subgrids(matrix)
+    subgrid = get_subgrid(pos[0], pos[1])
+    if num not in subgrids[subgrid][0] and num not in subgrids[subgrid][1] and num not in subgrids[subgrid][2]:
+        return True
+    else:
+        return False
 
-    for i in range(matrixx_y*3, matrixx_y*3 + 3):
-        for j in range(matrixx_x * 3, matrixx_x*3 + 3):
-            if matrix[i][j] == num and (i,j) != pos:
-                return False
-
-    return True
 
 
 #Vindt de volgende lege cel die ingevuld moet worden

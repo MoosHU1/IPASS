@@ -13,9 +13,7 @@ master.geometry("600x400")
 
 
 
-def create_button():
-    b = tk.Button(master, text="OK")
-    b.grid()
+
 
 
 def generate_solved():
@@ -158,22 +156,35 @@ def generate_solved():
 
 
 def draw_grid(matrix_get):
+    def create_button():
+        # b = tk.Button(master, text="OK")
+        # b.grid()
+        entries_get = []
+
+        for i in range(0, 81):
+            if entries[i].get() != "":
+                entries_get.append(int(entries[i].get()))
+            else:
+                entries_get.append(0)
+
+        print(entries_to_matrix(entries_get))
+
     master.title('Grid')
     entries = []
 
     b = 0
     for ncolumn in range(1, 10):
         for nrow in range(1, 10):
-            # create entries list
+            # Voeg alle entries toe aan de entries list. Background kleuren voor zichtbaarheid
             if (ncolumn == 4 or ncolumn == 5 or ncolumn == 6) and (nrow == 1 or nrow == 2 or nrow == 3):
-                entries.append(tk.Entry(master, width=5, background='grey'))
+                entries.append(tk.Entry(master, width=5, background='grey', disabledbackground = 'grey', disabledforeground = 'orange'))
             elif (ncolumn == 1 or ncolumn == 2 or ncolumn == 3 or ncolumn == 7 or ncolumn == 8 or ncolumn == 9) and (
                     nrow == 4 or nrow == 5 or nrow == 6):
-                entries.append(tk.Entry(master, width=5, background='grey'))
+                entries.append(tk.Entry(master, width=5, background='grey', disabledbackground = 'grey', disabledforeground = 'orange'))
             elif (ncolumn == 4 or ncolumn == 5 or ncolumn == 6) and (nrow == 7 or nrow == 8 or nrow == 9):
-                entries.append(tk.Entry(master, width=5, background='grey'))
+                entries.append(tk.Entry(master, width=5, background='grey', disabledbackground = 'grey', disabledforeground = 'orange'))
             else:
-                entries.append(tk.Entry(master, width=5))
+                entries.append(tk.Entry(master, width=5, disabledbackground = 'white', disabledforeground= 'orange'))
 
             # grid layout the entries
             entries[b].grid(row=nrow, column=ncolumn)
@@ -190,9 +201,17 @@ def draw_grid(matrix_get):
 
     for i in range (0,81):
         if matrix[i] != 0:
+
             entries[i].insert('end', int(matrix[i]) )
+            #Alle gegeven getallen moeten read only zijn om verwarring te voorkomen
+            entries[i].configure({"state": "disabled"})
 
 
+
+    button_1 = tk.Button(master, text="ok", command=create_button)
+    button_1.grid(row=82, column=82)
+
+    master.mainloop()
 
 
 #
@@ -222,5 +241,5 @@ matrix = [
 #     [0, 0, 0, 0, 0, 0, 7, 8, 9]
 # ]
 
+
 draw_grid(dig(generate_solved(), "easy"))
-master.mainloop()
