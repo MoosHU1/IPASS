@@ -86,8 +86,10 @@ def generate_solved():
     row = 0
     column = 0
     while row<9:
+        loop =0
         column = 0
         while column < 9:
+            loop += 1
             subgrid = get_subgrid(row,column)
 
             correct = False
@@ -149,6 +151,14 @@ def generate_solved():
                         column = 0
                         correct=True
             print("\n\n")
+            #Als het te lang duurt om een oplossing voor de huidige kolom te vinden begin dan helemaal opnieuw
+            if loop >500:
+
+                loop=0
+                matrix = numpy.zeros(shape=(9,9))
+                subgrids = matrix_to_subgrids(matrix)
+                column = 0
+                row =0
 
         row+=1
     return matrix
