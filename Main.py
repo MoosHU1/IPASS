@@ -1,4 +1,6 @@
-'''Bron 1 create_grid: https://www.daniweb.com/programming/software-development/threads/446765/making-multiple-entry-matrixxes-in-a-for-loop'''
+'''Bron 1 create_grid: https://www.daniweb.com/programming/software-development/threads/446765/making-multiple-entry-matrixxes-in-a-for-loop
+Bron 2: https://stackoverflow.com/questions/6431973/how-to-copy-data-from-a-numpy-array-to-another
+'''
 
 
 import tkinter as tk
@@ -130,8 +132,8 @@ def generate_solved():
                         if column == 2 or column == 5 or column == 8:
                             subgrids[subgrid][2][2] = temp_num
                     column += 1
-                    print(subgrids)
-                    print(matrix)
+
+                    #print(matrix)
                     correct = True
 
                 #Als deze rij niet meer correct ingevuld kan worden begin dan opnieuw met de rij
@@ -165,19 +167,37 @@ def generate_solved():
 
 
 
-def draw_grid(matrix_get):
+def draw_grid(matrix_digged,matrix_answer):
+    print(matrix_answer)
     def create_button():
         # b = tk.Button(master, text="OK")
         # b.grid()
         entries_get = []
-
+        print(matrix_answer)
         for i in range(0, 81):
             if entries[i].get() != "":
                 entries_get.append(int(entries[i].get()))
             else:
                 entries_get.append(0)
 
-        print(entries_to_matrix(entries_get))
+        user_input = entries_to_matrix(entries_get)
+        correct = True
+        for row in range(0,9):
+            for column in range(0,9):
+                if user_input[row][column] != 0 and matrix_answer[row][column] != user_input[row][column]:
+                    label.config(fg="red")
+                    correct=False
+                    var.set("Foutje")
+        if correct:
+            label.config(fg="green")
+            var.set("Goed")
+
+
+        # if matrix_digged != matrix_answer:
+        #     label.config(fg='red')
+        #     var.set("Incorrect")
+
+       # print(entries_to_matrix(entries_get))
 
     master.title('Grid')
     entries = []
@@ -203,53 +223,36 @@ def draw_grid(matrix_get):
             b += 1
 
 
-    matrix = []
+    matrix_list = []
     for column in range(9):
         for row in range(9):
-            matrix.append(matrix_get[row][column])
+            matrix_list.append(matrix_digged[row][column])
 
 
     for i in range (0,81):
-        if matrix[i] != 0:
+        if matrix_list[i] != 0:
 
-            entries[i].insert('end', int(matrix[i]) )
+            entries[i].insert('end', int(matrix_list[i]) )
             #Alle gegeven getallen moeten read only zijn om verwarring te voorkomen
             entries[i].configure({"state": "disabled"})
 
+    var = tk.StringVar()
+    label = tk.Label(master, textvariable=var)
 
+    label.grid(row= 86, column = 41)
 
-    button_1 = tk.Button(master, text="ok", command=create_button)
-    button_1.grid(row=82, column=82)
+    button_1 = tk.Button(master, text="Check", command=create_button)
+    button_1.grid(row=84, column=41)
 
     master.mainloop()
 
 
-#
-# create_button()
-# draw_grid(generate_solved())
-# master.mainloop()
-matrix = [
-    [7, 8, 0, 4, 0, 0, 1, 2, 0],
-    [6, 0, 0, 0, 7, 5, 0, 0, 9],
-    [0, 0, 0, 6, 0, 1, 0, 7, 8],
-    [0, 0, 7, 0, 4, 0, 2, 6, 0],
-    [0, 0, 1, 0, 5, 0, 9, 3, 0],
-    [9, 0, 4, 0, 6, 0, 0, 0, 5],
-    [0, 7, 0, 3, 0, 0, 0, 1, 2],
-    [1, 2, 0, 0, 0, 7, 4, 0, 0],
-    [0, 4, 9, 2, 0, 6, 0, 0, 7]
-]
-# matrix = [
-#     [1, 2, 3, 4, 5, 6, 7, 8, 9],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 2, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 1, 3, 4],
-#     [2, 0, 0, 0, 0, 0, 5, 6, 0],
-#     [0, 0, 0, 0, 0, 0, 7, 8, 9]
-# ]
+solved = generate_solved()
+#Maak een echte copy, niet een verwijzing. Zie bron 2
+digable = numpy.empty_like(solved)
+digable[:] = solved
+
+digged = dig(digable,"easy")
+draw_grid(digged, solved)
 
 
-draw_grid(dig(generate_solved(), "easy"))

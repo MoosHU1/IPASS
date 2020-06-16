@@ -82,14 +82,14 @@ def check_valid(matrix, row, column, dif):
 
 def dig(matrix, dif):
     dict = {}
-    print("AAAAAAAAAAAAAAA")
+
     # 1 betekent "can be dug", 0 betekent "can't be dug"
     for i in range(0, 9):
         for j in range(0, 9):
             dict.update({(i, j): 1})
 
     while 1==1:
-        print(matrix)
+
         next = find_next(dict, dif)
 
 
