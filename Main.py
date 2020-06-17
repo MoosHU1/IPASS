@@ -152,7 +152,6 @@ def generate_solved():
                         subgrids = matrix_to_subgrids(matrix)
                         column = 0
                         correct=True
-            print("\n\n")
             #Als het te lang duurt om een oplossing voor de huidige kolom te vinden begin dan helemaal opnieuw
             if loop >500:
 
@@ -168,12 +167,12 @@ def generate_solved():
 
 
 def draw_grid(matrix_digged,matrix_answer):
-    print(matrix_answer)
-    def create_button():
+
+    def create_button_check():
         # b = tk.Button(master, text="OK")
         # b.grid()
         entries_get = []
-        print(matrix_answer)
+
         for i in range(0, 81):
             if entries[i].get() != "":
                 entries_get.append(int(entries[i].get()))
@@ -192,6 +191,14 @@ def draw_grid(matrix_digged,matrix_answer):
             label.config(fg="green")
             var.set("Goed")
 
+    def create_button_new():
+        solved = generate_solved()
+        # Maak een echte copy, niet een verwijzing. Zie bron 2
+        digable = numpy.empty_like(solved)
+        digable[:] = solved
+
+        digged = dig(digable, "difficult")
+        draw_grid(digged, solved)
 
         # if matrix_digged != matrix_answer:
         #     label.config(fg='red')
@@ -241,8 +248,11 @@ def draw_grid(matrix_digged,matrix_answer):
 
     label.grid(row= 86, column = 41)
 
-    button_1 = tk.Button(master, text="Check", command=create_button)
+    button_1 = tk.Button(master, text="Check", command=create_button_check)
     button_1.grid(row=84, column=41)
+
+    button_1 = tk.Button(master, text="New", command=create_button_new)
+    button_1.grid(row=88, column=41)
 
     master.mainloop()
 
