@@ -38,11 +38,11 @@ def find_next(dict, dif):
 
 def check_valid(matrix, row, column, dif):
     correct_num = matrix[row,column]
-    print(dif)
     nums = [1,2,3,4,5,6,7,8,9]
     nums.remove(correct_num)
 
     subgrid = get_subgrid(row,column)
+
     subgrids = matrix_to_subgrids(matrix)
 
     #Eerst moet er gekeken worden of als je deze cel dugt je een restrictie verbreekt (operation 2)
@@ -78,7 +78,8 @@ def check_valid(matrix, row, column, dif):
         if num not in matrix[row] and num not in matrix[:, column] and num not in subgrids[subgrid][0] \
                 and num not in subgrids[subgrid][1] and num not in subgrids[subgrid][2]:
 
-            temp_matrix = matrix
+            temp_matrix = numpy.empty_like(matrix)
+            temp_matrix[:] = matrix
             temp_matrix[row,column] = num
 
             #Als er geen oplossing is ga dan verder
@@ -99,7 +100,7 @@ def dig(matrix, dif):
             dict.update({(i, j): 1})
 
     while 1==1:
-        print(matrix)
+
         next = find_next(dict, dif)
 
 

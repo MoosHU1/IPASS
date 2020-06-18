@@ -171,8 +171,9 @@ def draw_grid(matrix_digged,matrix_answer):
     def create_button_check():
         # b = tk.Button(master, text="OK")
         # b.grid()
-        entries_get = []
 
+
+        entries_get = []
         for i in range(0, 81):
             if entries[i].get() != "":
                 entries_get.append(int(entries[i].get()))
@@ -180,10 +181,13 @@ def draw_grid(matrix_digged,matrix_answer):
                 entries_get.append(0)
 
         user_input = entries_to_matrix(entries_get)
+
+
         correct = True
         for row in range(0,9):
             for column in range(0,9):
                 if user_input[row][column] != 0 and matrix_answer[row][column] != user_input[row][column]:
+                    print(row,column)
                     label.config(fg="red")
                     correct=False
                     var.set("Foutje")
@@ -197,7 +201,7 @@ def draw_grid(matrix_digged,matrix_answer):
         digable = numpy.empty_like(solved)
         digable[:] = solved
 
-        digged = dig(digable, "difficult")
+        digged = dig(digable, "easy")
         draw_grid(digged, solved)
 
         # if matrix_digged != matrix_answer:
@@ -258,11 +262,14 @@ def draw_grid(matrix_digged,matrix_answer):
 
 
 solved = generate_solved()
+
 #Maak een echte copy, niet een verwijzing. Zie bron 2
 digable = numpy.empty_like(solved)
 digable[:] = solved
 
+
 digged = dig(digable,"easy")
+
 draw_grid(digged, solved)
 
 
