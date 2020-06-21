@@ -29,9 +29,9 @@ def draw_grid(matrix_digged,matrix_answer):
                 entries_get.append(int(entries[i].get()))
             else:
                 entries_get.append(0)
-
+        print(entries_get)
         user_input = entries_to_matrix(entries_get)
-
+        print(user_input)
 
         correct = True
         for row in range(0,9):
@@ -115,14 +115,14 @@ def draw_grid(matrix_digged,matrix_answer):
         for nrow in range(1, 10):
             # Voeg alle entries toe aan de entries list. Background kleuren voor zichtbaarheid
             if (ncolumn == 4 or ncolumn == 5 or ncolumn == 6) and (nrow == 1 or nrow == 2 or nrow == 3):
-                entries.append(tk.Entry(master, width=5, background='grey', disabledbackground = 'grey', disabledforeground = 'orange', font=(20)))
+                entries.append(tk.Entry(master, width=3, background='grey', disabledbackground = 'grey', disabledforeground = 'orange', font=(20)))
             elif (ncolumn == 1 or ncolumn == 2 or ncolumn == 3 or ncolumn == 7 or ncolumn == 8 or ncolumn == 9) and (
                     nrow == 4 or nrow == 5 or nrow == 6):
-                entries.append(tk.Entry(master, width=5, background='grey', disabledbackground = 'grey', disabledforeground = 'orange', font=(20)))
+                entries.append(tk.Entry(master, width=3, background='grey', disabledbackground = 'grey', disabledforeground = 'orange', font=(20)))
             elif (ncolumn == 4 or ncolumn == 5 or ncolumn == 6) and (nrow == 7 or nrow == 8 or nrow == 9):
-                entries.append(tk.Entry(master, width=5, background='grey', disabledbackground = 'grey', disabledforeground = 'orange', font=(20)))
+                entries.append(tk.Entry(master, width=3, background='grey', disabledbackground = 'grey', disabledforeground = 'orange', font=(20)))
             else:
-                entries.append(tk.Entry(master, width=5, disabledbackground = 'white', disabledforeground= 'orange', font=(20)))
+                entries.append(tk.Entry(master, width=3, disabledbackground = 'white', disabledforeground= 'orange', font=(100)))
 
             # grid layout the entries
             entries[b].grid(row=nrow, column=ncolumn)
@@ -167,12 +167,14 @@ def draw_grid(matrix_digged,matrix_answer):
 
 solved = generate_solved()
 
+
+
 #Maak een echte copy, niet een verwijzing. Zie bron 2
 digable = numpy.empty_like(solved)
 digable[:] = solved
-
-
+print(solved)
 digged = dig(digable,"easy")
+print(digged)
 
 draw_grid(digged, solved)
 
