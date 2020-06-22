@@ -1,6 +1,4 @@
 import unittest
-from dig_holes import *
-import generate_solved as gen
 import numpy
 
 class test_solver(unittest.TestCase):

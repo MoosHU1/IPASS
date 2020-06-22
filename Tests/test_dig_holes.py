@@ -1,6 +1,6 @@
 import unittest
-from dig_holes import *
-import generate_solved as gen
+from Algorithmic.dig_holes import *
+from Algorithmic import generate_solved as gen
 import numpy
 
 class TestDig_easy(unittest.TestCase):

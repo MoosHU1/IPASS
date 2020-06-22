@@ -4,12 +4,8 @@ Bron 2: https://stackoverflow.com/questions/6431973/how-to-copy-data-from-a-nump
 
 
 import tkinter as tk
-import random as random
-import numpy
-from solver import *
-from dig_holes import *
-from tools import *
-from generate_solved import *
+from Algorithmic.dig_holes import *
+from Algorithmic.generate_solved import *
 
 master = tk.Tk()
 master.geometry("600x400")

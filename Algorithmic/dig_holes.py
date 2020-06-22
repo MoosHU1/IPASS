@@ -1,4 +1,4 @@
-from solver import *
+from Algorithmic.solver import *
 import random
 from tools import *
 import numpy

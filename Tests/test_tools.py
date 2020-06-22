@@ -1,7 +1,6 @@
 import unittest
-from dig_holes import *
-import generate_solved as gen
-import numpy
+from Algorithmic.dig_holes import *
+
 
 class test_tools(unittest.TestCase):
     def test_get_subgrid(self):
