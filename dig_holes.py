@@ -19,21 +19,6 @@ def find_next(dict, dif):
         if dif == "easy" or dif == "medium" or dif == "difficult":
             #Kies een random cel
             return random.choice(dugable)
-        # elif dif == "medium":
-        #     #Sla steeds 1 cel over
-        #     order = [0,2,4,6,8,16,14,12,10, 19,21,23,25,35,33,31,30,28, 36, 38, 40, 41, 44, 52, 50, 48, 46, 54, 56, 58, 60, 62, 70, 68, 66, 64, 72, 74, 75, 76, 78, 80 ]
-        #     try:
-        #         order.remove(order[0])
-        #         return dugable[order[0]]
-        #
-        #     except:
-        #         return None
-        #
-        # elif dif == "difficult":
-        #     order = [[i for i in range(0,9)],[i for i in range(17,8,-1)], [i for i in range(18,27)],[i for i in range(35, 26, -1)],
-        #             [i for i in range(36, 44)],[i for i in range(53, 44, -1)], [i for i in range(54,63)], [i for i in range(71,62, -1)],[i for i in range(72,81)]]
-        #
-
 
 
 def check_valid(matrix, row, column, dif):
@@ -94,6 +79,7 @@ def check_valid(matrix, row, column, dif):
 def dig(matrix, dif):
     dict = {}
 
+    #Dictionary met voor elke positie of hij wel of niet gedugged mag worden
     # 1 betekent "can be dug", 0 betekent "can't be dug"
     for i in range(0, 9):
         for j in range(0, 9):
@@ -104,19 +90,18 @@ def dig(matrix, dif):
         next = find_next(dict, dif)
 
 
-        if next != None:
-            if find_next(dict, dif) == None:
-                return matrix
-            else:
-                # Is er voor alle getallen geen oplossing dan kan de cel worden gedugt
-                if check_valid(matrix, next[0], next[1], dif) == True:
-                    matrix[next[0], next[1]] = 0
-                    dict[next[0],next[1]] = 0
-                else:
-                    dict[next] = 0
-        #Als er geen cellen meer gedugt kunnen worden is de sudoku klaar
-        else:
+
+        if find_next(dict, dif) == None:
+            # Als er geen cellen meer gedugt kunnen worden is de sudoku klaar
             return matrix
+        else:
+            # Is er voor alle getallen geen oplossing dan kan de cel worden gedugt
+            if check_valid(matrix, next[0], next[1], dif) == True:
+                matrix[next[0], next[1]] = 0
+                dict[next[0],next[1]] = 0
+            else:
+                dict[next] = 0
+
 
         
 

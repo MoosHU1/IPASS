@@ -29,9 +29,8 @@ def draw_grid(matrix_digged,matrix_answer):
                 entries_get.append(int(entries[i].get()))
             else:
                 entries_get.append(0)
-        print(entries_get)
+
         user_input = entries_to_matrix(entries_get)
-        print(user_input)
 
         correct = True
         for row in range(0,9):
@@ -61,11 +60,6 @@ def draw_grid(matrix_digged,matrix_answer):
         digged = dig(digable, "easy")
         draw_grid(digged, solved)
 
-        # if matrix_digged != matrix_answer:
-        #     label.config(fg='red')
-        #     var.set("Incorrect")
-
-       # print(entries_to_matrix(entries_get))
 
     master.title('Grid')
     entries = []
@@ -79,11 +73,6 @@ def draw_grid(matrix_digged,matrix_answer):
         digged = dig(digable, "medium")
         draw_grid(digged, solved)
 
-        # if matrix_digged != matrix_answer:
-        #     label.config(fg='red')
-        #     var.set("Incorrect")
-
-       # print(entries_to_matrix(entries_get))
 
     master.title('Grid')
     entries = []
@@ -96,12 +85,6 @@ def draw_grid(matrix_digged,matrix_answer):
 
         digged = dig(digable, "difficult")
         draw_grid(digged, solved)
-
-        # if matrix_digged != matrix_answer:
-        #     label.config(fg='red')
-        #     var.set("Incorrect")
-
-       # print(entries_to_matrix(entries_get))
 
     master.title('Grid')
     entries = []
@@ -172,9 +155,8 @@ solved = generate_solved()
 #Maak een echte copy, niet een verwijzing. Zie bron 2
 digable = numpy.empty_like(solved)
 digable[:] = solved
-print(solved)
+
 digged = dig(digable,"easy")
-print(digged)
 
 draw_grid(digged, solved)
 
