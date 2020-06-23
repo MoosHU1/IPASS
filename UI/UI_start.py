@@ -17,7 +17,6 @@ def draw_grid(matrix_digged,matrix_answer):
     def create_button_check():
         # b = tk.Button(master, text="OK")
         # b.grid()
-
         #Haalt alle ingevulde getallen van de gebruiker op en de gegeven getallen, oftewel alle getallen die je op dat moment ziet tijdens het spelen
         #Deze worden in een lijst gezet en vervolgens in een matrix omgezet
         #Als er geen getal is ingevuld in een vakje komt daar een 0, 0 wordt gebruikt voor een leeg vakje.

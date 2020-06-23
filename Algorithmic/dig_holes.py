@@ -13,8 +13,8 @@ def find_next(dict, dif):
     if len(dugable) == 0:
         return None
 
-    else:
-        return random.choice(dugable)
+
+    return random.choice(dugable)
 
 
 def check_valid(matrix, row, column, dif):
@@ -79,10 +79,9 @@ def dig(matrix, dif):
         for j in range(0, 9):
             dict.update({(i, j): 1})
 
+
     while 1==1:
-
         next = find_next(dict, dif)
-
 
 
         if find_next(dict, dif) == None:
