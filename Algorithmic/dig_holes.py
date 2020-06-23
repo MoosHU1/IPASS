@@ -14,11 +14,7 @@ def find_next(dict, dif):
         return None
 
     else:
-        #Voor elke moeilijkheidsgraad is er een verschillend dug patroon
-
-        if dif == "easy" or dif == "medium" or dif == "difficult":
-            #Kies een random cel
-            return random.choice(dugable)
+        return random.choice(dugable)
 
 
 def check_valid(matrix, row, column, dif):
@@ -33,27 +29,25 @@ def check_valid(matrix, row, column, dif):
     #Eerst moet er gekeken worden of als je deze cel dugt je een restrictie verbreekt (operation 2)
 
     if dif == "easy":
-        min_empty = 31
-        max_empty = 45
-        min_givens_rowcol = 5
+        min_givens = 36
+        max_givens = 49
+        min_givens_rowcol = 4
 
     elif dif == "medium":
-        min_empty = 45
-        max_empty = 49
-        min_givens_rowcol = 6
+        min_givens = 32
+        max_givens = 35
+        min_givens_rowcol = 3
 
     elif dif == "difficult":
-        min_empty = 49
-        max_empty = 53
-        min_givens_rowcol = 7
-        order = [[i for i in range(0, 9)], [i for i in range(17, 8, -1)], [i for i in range(18, 27)],[i for i in range(35, 26, -1)],
-                 [i for i in range(36, 44)],[i for i in range(53, 44, -1)], [i for i in range(54,63)], [i for i in range(71,62, -1)],[i for i in range(72,81)]]
+        min_givens = 28
+        max_givens = 31
+        min_givens_rowcol = 2
 
-    randomized_bound = random.randrange(min_empty, max_empty)
-    if numpy.count_nonzero(matrix==0) > randomized_bound:
+    randomized_bound = random.randrange(min_givens, max_givens)
+    if numpy.count_nonzero(matrix) < randomized_bound:
         return False
 
-    elif numpy.count_nonzero(matrix[row]==0)>=min_givens_rowcol  or numpy.count_nonzero(matrix[:,column]==0)>=min_givens_rowcol:
+    elif numpy.count_nonzero(matrix[row]) <= min_givens_rowcol or numpy.count_nonzero(matrix[:, column]) <= min_givens_rowcol:
         return False
 
 
