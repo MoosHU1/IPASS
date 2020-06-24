@@ -2,6 +2,7 @@ import numpy
 from tools import *
 import random
 
+#Deze functie genereert een volledig opgeloste sudoku
 def generate_solved():
 
 

@@ -3,6 +3,7 @@ import random
 from tools import *
 import numpy
 
+#Deze functie zoekt de volgende cel die gedugt kan worden
 def find_next(dict, dif):
     #Lijst met keys(coordinaten) die kunnen worden gedugt
     dugable = []
@@ -16,7 +17,7 @@ def find_next(dict, dif):
 
     return random.choice(dugable)
 
-
+#Deze functie checkt of de cel gedugt mag worden
 def check_valid(matrix, row, column, dif):
     correct_num = matrix[row,column]
     nums = [1,2,3,4,5,6,7,8,9]
@@ -74,6 +75,7 @@ def check_valid(matrix, row, column, dif):
     #Wordt aan alle regels voldaan? Dan mag de cel leeggemaakt worden
     return True
 
+#Deze functie haalt getallen weg op basis van moeilijkheidsgraad
 def dig(matrix, dif):
     dict = {}
 

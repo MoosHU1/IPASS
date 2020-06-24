@@ -1,6 +1,7 @@
 from tools import *
 
 loop = 0
+#Deze functie lost de sudoku op
 def solve(matrix):
     global loop
     find = find_empty(matrix)
@@ -28,18 +29,22 @@ def solve(matrix):
 
 
 #Checkt of het getal ingevuld kan worden volgens de regels van sudoku
+#Matrix is het sudoku veld, num is het getal wat je in wil vullen en pos is de positie daarvan
 def valid(matrix, num, pos):
-    # Check row
+    # Check rij
+    # Check elk getal in de rij van het getal wat je in wil voegen, staat dit getal al in de rij (Op een andere plek) return false
     for i in range(len(matrix[0])):
         if matrix[pos[0]][i] == num and pos[1] != i:
             return False
 
-    # Check column
+    # Check kolom
+    # Check elk getal in de kolom van het getal wat je in wil voegen, staat dit getal al in de kolom (Op een andere plek) return false
     for i in range(len(matrix)):
         if matrix[i][pos[1]] == num and pos[0] != i:
             return False
 
-    # Check submatrixx
+    # Check submatrix
+    # Check elk getal in de submatrix van het getal wat je in wil voegen, staat dit getal al in de submatrix (Op een andere plek) return false
     subgrids = matrix_to_subgrids(matrix)
     subgrid = get_subgrid(pos[0], pos[1])
     if num not in subgrids[subgrid][0] and num not in subgrids[subgrid][1] and num not in subgrids[subgrid][2]:

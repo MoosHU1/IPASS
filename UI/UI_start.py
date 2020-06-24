@@ -12,7 +12,7 @@ master.geometry("600x400")
 
 
 
-
+#Functie maakt de knoppen en het veld met entries aan
 def draw_grid(matrix_digged,matrix_answer):
     def create_button_check():
         # b = tk.Button(master, text="OK")
