@@ -46,6 +46,7 @@ def draw_grid(matrix_digged,matrix_answer):
         #Als het helemaal correct is wordt er eerst nog gecheckt of alles is ingevuld, dan is de puzzel klaar en verandert het label naar "Gehaald!!"
         #Als alles wat tot nu toe is ingevuld correct is wordt het label omgezet naar "Goed"
         if correct:
+            print(numpy.count_nonzero(user_input == 0))
             if numpy.count_nonzero(user_input == 0) == 0:
                 label.config(fg="green")
                 var.set("")

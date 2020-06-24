@@ -28,9 +28,12 @@ def check_valid(matrix, row, column, dif):
 
     #Eerst moet er gekeken worden of als je deze cel dugt je een restrictie verbreekt (operation 2)
 
+    #Regels per moeilijkheidsgraad
     if dif == "easy":
+        # Het totaal aantal gegeven getallen moet tussen deze twee getallen zitten
         min_givens = 36
         max_givens = 49
+        #Het aantal gegevens per rij en kolom moet hoger of gelijk zijn dan dit getal
         min_givens_rowcol = 4
 
     elif dif == "medium":
@@ -43,6 +46,7 @@ def check_valid(matrix, row, column, dif):
         max_givens = 31
         min_givens_rowcol = 2
 
+    #Als niet aan de bovenstaande regels voldaan wordt dan mag de cel niet leeggemaakt worden
     randomized_bound = random.randrange(min_givens, max_givens)
     if numpy.count_nonzero(matrix) < randomized_bound:
         return False
@@ -51,7 +55,7 @@ def check_valid(matrix, row, column, dif):
         return False
 
 
-
+    #Voor elk ander getal dan het getal wat je weg gaat halen mag er GEEN oplossing zijn als je die in de cel invult die je weg wil halen
     for num in nums:
         #Het getal wat je gaat testen moet natuurlijk wel aan de regels voldoen
         if num not in matrix[row] and num not in matrix[:, column] and num not in subgrids[subgrid][0] \
@@ -67,7 +71,7 @@ def check_valid(matrix, row, column, dif):
             else:
                 return False
 
-
+    #Wordt aan alle regels voldaan? Dan mag de cel leeggemaakt worden
     return True
 
 def dig(matrix, dif):
