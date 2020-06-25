@@ -49,9 +49,7 @@ class TestDig_difficult(unittest.TestCase):
         #test of de dig functie voor elke moeilijkheidsgraad het correcte aantal totale gegeven getallen geeft
         matrix = gen.generate_solved()
         matrix_dig = dig(matrix, "difficult")
-
         nonzero = numpy.count_nonzero(matrix_dig)
-        print(nonzero)
         self.assertTrue(31 >= nonzero >= 28)
 
     def test_dig_difficult_rowcol(self):
