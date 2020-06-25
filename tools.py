@@ -1,6 +1,9 @@
-# In welke subgrid zit de huidige plek
-import numpy
 
+import numpy
+#In dit bestand staat een functie om de subgrid te krijgen van een bepaalde plek en twee functies om dingen om te zetten
+
+
+# In welke subgrid zit de huidige plek
 def get_subgrid(row,column):
     if row == 0 or row == 1 or row == 2:
         if column == 0 or column == 1 or column == 2:
