@@ -49,9 +49,12 @@ def check_valid(matrix, row, column, dif):
 
     #Als niet aan de bovenstaande regels voldaan wordt dan mag de cel niet leeggemaakt worden
     randomized_bound = random.randrange(min_givens, max_givens)
-    if numpy.count_nonzero(matrix) < randomized_bound:
+
+    #Als er minder totaal gegeven getallen zijn dan toegestaan
+    if numpy.count_nonzero(matrix) <= randomized_bound:
         return False
 
+    # Als er minder totaal gegeven getallen per rij of kolom zijn dan toegestaan
     elif numpy.count_nonzero(matrix[row]) <= min_givens_rowcol or numpy.count_nonzero(matrix[:, column]) <= min_givens_rowcol:
         return False
 

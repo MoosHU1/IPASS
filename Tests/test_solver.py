@@ -1,5 +1,6 @@
 import unittest
 import numpy
+from Algorithmic.solver import *
 
 class test_solver(unittest.TestCase):
     def test_solve_puzzle(self):
