@@ -56,9 +56,9 @@ def valid(matrix, num, pos):
 
 #Vindt de volgende lege cel die ingevuld moet worden
 def find_empty(matrix):
-    for i in range(len(matrix)):
-        for j in range(len(matrix[0])):
-            if matrix[i][j] == 0:
+    for i in range(len(matrix)): #Alle rijen
+        for j in range(len(matrix[0])): #Alle kolommen
+            if matrix[i][j] == 0: #Is deze cel leeg? return dan de positie
                 return (i, j)  # row, col
 
     return None

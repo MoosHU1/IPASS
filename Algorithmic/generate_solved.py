@@ -76,8 +76,6 @@ def generate_solved():
                 temp_num = random.choice(nums)
 
                 #Check of het getal op de huidige plek aan de regels voldoet, zo ja vul hem dan in
-
-
                 if temp_num not in matrix[row] and temp_num not in matrix[:,column] and temp_num not in subgrids[subgrid][0]\
                     and temp_num not in subgrids[subgrid][1] and temp_num not in subgrids[subgrid][2] :
 
