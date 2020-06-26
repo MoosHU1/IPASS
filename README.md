@@ -1,1 +1,1 @@
-Benodigde modules: 
+Benodigde modules: Numpy en Tkinter
